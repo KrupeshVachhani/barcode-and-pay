@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Payment_App</string>
+    <string name="hello">Hey There, </string>
+    <string name="create_account">Create an Account</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="email">Enter Email</string>
+    <string name="password">Enter Password</string>
+    <string name="name">Enter Name</string>
+    <string name="terms_condition">By continuing you accept our Privacy Policy and Term of Use</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+</resources>
