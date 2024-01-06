@@ -9,4 +9,6 @@
     <string name="terms_condition">By continuing you accept our Privacy Policy and Term of Use</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="welcome">Welcome Back</string>
+    <string name="go_to_login">Already have an account? Login</string>
 </resources>

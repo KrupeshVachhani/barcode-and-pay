@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
@@ -20,9 +21,11 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.Text
@@ -47,11 +50,13 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.constraintlayout.compose.Visibility
+import androidx.navigation.NavController
 import com.example.payment_app.R
+import com.example.payment_app.screens.AppScreens
 import com.example.payment_app.ui.theme.ComponentShapes
+import com.example.payment_app.ui.theme.GrayColor
 import com.example.payment_app.ui.theme.Primary
 import com.example.payment_app.ui.theme.Secondary
-import com.example.payment_app.ui.theme.TextColor
 import androidx.compose.material3.Icon as Icon1
 
 
@@ -64,7 +69,7 @@ fun NormalTextComponent(value: String) {
             .heightIn(min = 40.dp),
         style = TextStyle(
             fontSize = 24.sp,
-            color = Color.Black,
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Normal
         ),
         textAlign = TextAlign.Center
@@ -81,7 +86,7 @@ fun HeadingTextComponent(value: String) {
             .heightIn(min = 40.dp),
         style = TextStyle(
             fontSize = 32.sp,
-            color = Color.Black,
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Bold
         ),
         textAlign = TextAlign.Center
@@ -106,7 +111,7 @@ fun NameField(labelValue: String) {
                 contentDescription = null
             )
         },
-        textStyle = TextStyle(color = TextColor, fontWeight = FontWeight.Normal),
+        textStyle = TextStyle(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Normal),
         modifier = Modifier
             .fillMaxWidth()
             .clip(ComponentShapes.small)
@@ -139,7 +144,7 @@ fun MailField(labelValue: String) {
             contentDescription = null
         )
         },
-        textStyle = TextStyle(color = TextColor, fontWeight = FontWeight.Normal),
+        textStyle = TextStyle(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Normal),
         modifier = Modifier
             .fillMaxWidth()
             .clip(ComponentShapes.small)
@@ -174,7 +179,7 @@ fun PasswordField(labelValue: String, modifier: Modifier) {
                 modifier = Modifier.size(24.dp)
             )
         },
-        textStyle = TextStyle(color = TextColor, fontWeight = FontWeight.Normal),
+        textStyle = TextStyle(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Normal),
         modifier = modifier
             .fillMaxWidth()
             .clip(ComponentShapes.small)
@@ -231,19 +236,27 @@ fun CheckBoxComponents(value:String){
 
 @Composable
 fun ClickableTextComponent(value: String) {
+
+    val primaryColor = MaterialTheme.colorScheme.primary
+
     val initialText = "By continuing you accept our "
     val privacyPolicyText = " Privacy Policy "
     val andText = " and "
     val termsAndConditionsText = " Term of Use "
 
     val annotatedString = buildAnnotatedString {
-        append(initialText)
-        withStyle(style = SpanStyle(color = Primary)) {
+        withStyle(style = SpanStyle(color = Secondary)){
+            append(initialText)
+        }
+        withStyle(style = SpanStyle(color = primaryColor)) {
             pushStringAnnotation(tag = privacyPolicyText, annotation = privacyPolicyText)
             append(privacyPolicyText)
         }
+
+        withStyle(style = SpanStyle(color = Secondary)){
         append(andText)
-        withStyle(style = SpanStyle(color = Primary)) {
+        }
+        withStyle(style = SpanStyle(color = primaryColor)) {
             pushStringAnnotation(tag = termsAndConditionsText, annotation = termsAndConditionsText)
             append(termsAndConditionsText)
         }
@@ -266,9 +279,8 @@ fun ButtonComponent(value:String){
         modifier= Modifier
             .fillMaxWidth()
             .heightIn(48.dp)
-            .padding(horizontal = 16.dp, vertical = 24.dp)
+            .padding(horizontal = 30.dp, vertical = 18.dp)
         ,
-
         contentPadding= PaddingValues(),
         colors=ButtonDefaults.buttonColors(Color.Transparent)
     ){
@@ -276,7 +288,7 @@ fun ButtonComponent(value:String){
             fillMaxWidth()
                 .heightIn(48.dp)
                 .background(
-                    brush =  Brush.horizontalGradient(listOf(Secondary, Primary)),
+                    brush = Brush.horizontalGradient(listOf(Secondary, Primary)),
                     shape = RoundedCornerShape(50.dp)
                 )
         },
@@ -289,4 +301,75 @@ fun ButtonComponent(value:String){
         }
 
     }
+}
+
+@Composable
+fun DividerTextComponent(){
+    Row(modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+        ) {
+        Divider(
+            modifier= Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(horizontal = 14.dp)
+            ,
+            color= GrayColor,
+            thickness=1.dp
+        )
+
+        Text(text = "or", fontSize = 18.sp, color= MaterialTheme.colorScheme.primary)
+        
+        Divider(
+            modifier= Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(horizontal = 14.dp)
+            ,
+            color= GrayColor,
+            thickness=1.dp
+        )
+
+    }
+}
+@Composable
+fun ClickableTextComponentLogin(
+    tryingToLogin: Boolean = true,
+    onSelectedText: (String) -> Unit
+) {
+
+    val primaryColor = MaterialTheme.colorScheme.primary
+
+    val initialText = if (tryingToLogin) " Already have an account? " else " Don't have an account?  "
+    val loginText = if (tryingToLogin) " Login " else " Register "
+    val targetDestination = if (tryingToLogin) "login" else "register" // Adjust destination names as needed
+
+    val annotatedString = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Secondary)) {
+            append(initialText)
+        }
+        withStyle(style = SpanStyle(color = primaryColor)) {
+            pushStringAnnotation(tag = loginText, annotation = loginText)
+            append(loginText)
+        }
+    }
+
+    ClickableText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        style = TextStyle(
+            fontSize = 18.sp,
+            color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.Normal,
+            textAlign = TextAlign.Center
+        ),
+        text = annotatedString,
+        onClick = { offset ->
+            val selectedText = annotatedString.getStringAnnotations(offset, offset).firstOrNull()
+            selectedText?.let {
+//                navController.navigate(route = AppScreens.loginScreen.route) // Correct navigation path
+            }
+        }
+    )
 }

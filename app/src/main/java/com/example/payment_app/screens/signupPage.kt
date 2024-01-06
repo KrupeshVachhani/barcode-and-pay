@@ -7,8 +7,9 @@ import PasswordField
 import NameField
 import CheckBoxComponents
 import ButtonComponent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import DividerTextComponent
+import ClickableTextComponentLogin
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,8 +22,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.payment_app.R
+import androidx.compose.material3.Text as Text1
 import androidx.compose.ui.platform.LocalFocusManager as LocalFocusManager1
+
 
 @Composable
 fun SignupPage() {
@@ -56,6 +61,11 @@ fun SignupPage() {
                 CheckBoxComponents(value = stringResource(id = R.string.terms_condition))
 
                 ButtonComponent(value = stringResource(id = R.string.register))
+
+                DividerTextComponent()
+
+                ClickableTextComponentLogin(tryingToLogin = true, onSelectedText = {}) // Pass NavController
+
             }
         }
     }
@@ -65,4 +75,5 @@ fun SignupPage() {
 @Composable
 fun PreviewSignupPage() {
     SignupPage()
+//    val navController = rememberNavController()  // Create a NavController for preview
 }
