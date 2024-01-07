@@ -1,33 +1,29 @@
 package com.example.payment_app.screens
 
-import NormalTextComponent
-import HeadingTextComponent
-import PasswordField
-import MailField
 import ButtonComponent
-import DividerTextComponent
 import ClickableTextComponentLogin
+import DividerTextComponent
+import HeadingTextComponent
+import MailField
+import NormalTextComponent
+import PasswordField
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.payment_app.R
+import com.nativemobilebits.loginflow.navigation.PostOfficeAppRouter
+import com.nativemobilebits.loginflow.navigation.Screen
 
 @Composable
 fun loginPage() {
@@ -64,7 +60,12 @@ fun loginPage() {
             DividerTextComponent()
             Spacer(modifier = Modifier.padding(bottom = 30.dp)  )
 
-            ClickableTextComponentLogin(tryingToLogin = true, onSelectedText = {})
+            ClickableTextComponentLogin(tryingToLogin = false, onTextSelected = {
+                PostOfficeAppRouter.navigateTo(Screen.SignUpScreen)
+            })
+//            ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
+//                PostOfficeAppRouter.navigateTo(Screen.SignUpScreen)
+//            })
         }
     }
 }

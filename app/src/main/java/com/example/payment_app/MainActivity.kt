@@ -8,13 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.payment_app.screens.AppNavGraph
-import com.example.payment_app.screens.SignupPage
-import com.example.payment_app.screens.loginPage
 import com.example.payment_app.ui.theme.Payment_AppTheme
+import com.nativemobilebits.loginflow.app.PostOfficeApp
 
 class MainActivity : ComponentActivity() {
 
@@ -30,7 +25,9 @@ class MainActivity : ComponentActivity() {
                     ) {
 //                        AppNavGraph(navController = navController) // Pass NavController to AppNavGraph
 //                        SignupPage()
-                        loginPage()
+//                        loginPage()
+                        PostOfficeApp()
+
                     }
             }
         }

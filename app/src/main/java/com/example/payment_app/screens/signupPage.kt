@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.payment_app.R
+import com.nativemobilebits.loginflow.navigation.PostOfficeAppRouter
+import com.nativemobilebits.loginflow.navigation.Screen
 import androidx.compose.material3.Text as Text1
 import androidx.compose.ui.platform.LocalFocusManager as LocalFocusManager1
 
@@ -64,7 +66,9 @@ fun SignupPage() {
 
                 DividerTextComponent()
 
-                ClickableTextComponentLogin(tryingToLogin = true, onSelectedText = {}) // Pass NavController
+                ClickableTextComponentLogin(tryingToLogin = true, onTextSelected = {
+                    PostOfficeAppRouter.navigateTo(Screen.LoginScreen)
+                } ) // Pass NavController
 
             }
         }
